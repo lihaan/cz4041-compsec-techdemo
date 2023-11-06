@@ -1,0 +1,8 @@
+# Ignore cache
+__pycache__
+
+# Ignore env
+env
+
+# Ignore debugging configuration
+.vscode
