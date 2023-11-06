@@ -17,4 +17,4 @@ Install requirements
 
 2. Run attack script in a separate terminal instance
     - stolen data is output as _stolen_data.csv_
-    > python server.py
+    > python steal.py
