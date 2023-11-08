@@ -4,6 +4,7 @@ For CZ4062 Computer Security (Group 63)
 ## Architecture
 - Data: CSV file containing fake user data
 - Backend: Flask API server
+- Frontend: HTML & Javascript
 - Attack script: Python script
 
 ## Setup
