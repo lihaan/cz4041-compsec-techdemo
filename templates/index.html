@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Backend Database Login</title>
+</head>
+<body>
+    <h1>backend database</h1>
+    <form id="loginForm" onsubmit="validateForm()" method="POST">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username === "{{ USER_DATA['username'] }}" && password === "{{ USER_DATA['password'] }}") {
+                alert("Login successful!");
+                window.location.href = "http://localhost:5000/user_info";
+                return false;
+                
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+            event.preventDefault();
+        }
+    </script>
+</body>
+</html>

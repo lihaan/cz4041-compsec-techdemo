@@ -1,8 +1,14 @@
-from flask import Flask
-from flask import request, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, send_file
 from helpers import import_data_into_db
 from apispec import APISpec
 import pprint as pp
+
+USER_DATA = {
+    "username": "smith",
+    "password": "password123"
+}
+
+IS_AUTH = False
 
 app = Flask(__name__)
 spec = APISpec(
@@ -37,13 +43,35 @@ GLOBALS = {
 }
 
 @app.route("/")
-def hello_world():
-    return "<p>Private API page! Do not enter!</p>"
 
 
-@app.route('/userInfo', methods=['GET'])
-def getUserInfo():
-    return f"<p>API for retrieving user information</p><br><p>OpenAPI Specifications:</p><p>{spec_sheet_html}</p>"
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    global IS_AUTH
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if username == USER_DATA["username"] and password == USER_DATA["password"]:
+            IS_AUTH = True
+            return redirect("/user_info")
+        else:
+            return "Invalid username or password. Please try again."
+    return render_template('index.html', USER_DATA=USER_DATA)
+
+@app.route("/user_info", methods=["GET"])
+def user_info():
+    if IS_AUTH:
+        with open('user_data.csv', 'r') as file:
+            data = file.read()
+        return render_template('display_data.html', data=data)
+    else:
+        return "NOT LOGGED IN"
+
+# @app.route('/userInfo', methods=['GET'])
+# def getUserInfo():
+#     return f"<p>API for retrieving user information</p><br><p>OpenAPI Specifications:</p><p>{spec_sheet_html}</p>"
 
 
 @app.route('/userInfo', methods=['POST'])
