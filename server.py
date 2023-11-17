@@ -5,7 +5,7 @@ import pprint as pp
 
 USER_DATA = {
     "username": "smith",
-    "password": "password123"
+    "password": "password"
 }
 
 IS_AUTH = False
@@ -55,12 +55,12 @@ def index():
 
         if username == USER_DATA["username"] and password == USER_DATA["password"]:
             IS_AUTH = True
-            return redirect("/user_info")
+            return redirect("/userInfo")
         else:
             return "Invalid username or password. Please try again."
     return render_template('index.html', USER_DATA=USER_DATA)
 
-@app.route("/user_info", methods=["GET"])
+@app.route("/userInfo", methods=["GET"])
 def user_info():
     if IS_AUTH:
         with open('user_data.csv', 'r') as file:

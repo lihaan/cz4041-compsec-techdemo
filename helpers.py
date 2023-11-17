@@ -22,3 +22,7 @@ def import_data_into_db(path):
     table = Table(data)
 
     return table
+
+
+def authenticate(username, password):
+    return username == "smith" and password == "password"

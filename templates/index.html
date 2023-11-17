@@ -18,9 +18,9 @@
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
-            if (username === "{{ USER_DATA['username'] }}" && password === "{{ USER_DATA['password'] }}") {
+            if (authenticate(username, password)) {
                 alert("Login successful!");
-                window.location.href = "http://localhost:5000/user_info";
+                window.location.href = "http://127.0.0.1:5000/userInfo";
                 return false;
                 
             } else {
